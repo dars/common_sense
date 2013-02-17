@@ -33,3 +33,9 @@
 .things .disagree_block a:hover {
   color: #be1d36;
 }
+.copyright {
+  color: #9ca4a8;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  text-align: center;
+}

@@ -1,45 +1,45 @@
 function commonForm($scope)
 {
-	$scope.things = "";
-	$scope.commonThings = [{content:"初始資料...", isDelete:false,agree:0, disagree:0, timestamp:"0000-00-00 00:00"}];
-	$scope.getLists = function()
-	{
-	    var msgs = new Message();
-	    var q = new StackMob.Collection.Query();
-	    q.orderDesc('createddate');
-	    $(".alert").show();
+    $scope.things = "";
+    $scope.commonThings = [];
+    $scope.getLists = function()
+    {
+        var msgs = new Message();
+        var q = new StackMob.Collection.Query();
+        q.orderDesc('createddate');
+        $(".alert").show();
         msgs.query(q, {
             success: function(model) {
-            	var obj = model.toJSON();
-            	var res = [];
-            	$.each(obj, function(i, o){
-            		o.isDelete = false;
+                var obj = model.toJSON();
+                var res = [];
+                $.each(obj, function(i, o){
+                    o.isDelete = false;
                     o.timestamp = getDatetime(o.createddate);
-            		res.push(o);
-            	});
-            	$scope.$apply(function() {
+                    res.push(o);
+                });
+                $scope.$apply(function() {
                     $scope.commonThings = res;
                 });
-            	$(".alert").hide();
+                $(".alert").hide();
             },
             error: function(model, response) {
                 $(".alert").hide();
             }
         });
-	}
-	$scope.getLists();
-	$scope.addThing = function()
-	{
-		if(this.things){
-			$(".alert").show();
-			var to = new Message({
+    }
+    $scope.getLists();
+    $scope.addThing = function()
+    {
+        if(this.things){
+            $(".alert").show();
+            var to = new Message({
                 content: this.things,
                 agree:0,
                 disagree:0
             });
             to.create({
                 success:function(model) {
-                	$scope.getLists();
+                    $scope.getLists();
                     console.debug(model.toJSON());
                     $(".alert").hide();
                 },
@@ -53,50 +53,50 @@ function commonForm($scope)
                 }
             });
             this.things = "";
-		}
-	}
+        }
+    }
 
-	$scope.agree_btn = function(item)
-	{
-		var query = new Message({message_id:item.message_id, agree:item.agree+1});
-		query.save({}, {
+    $scope.agree_btn = function(item)
+    {
+        var query = new Message({message_id:item.message_id, agree:item.agree+1});
+        query.save({}, {
             success: function(model) {
-            	$scope.getLists();
+                $scope.getLists();
                 console.debug(model.toJSON());
             },
             error: function(model, response) {
                 console.debug(response);
             }
         });
-	}
+    }
 
-	$scope.disagree_btn = function(item)
-	{
-		var query = new Message({message_id:item.message_id, disagree:item.disagree+1});
-		query.save({}, {
+    $scope.disagree_btn = function(item)
+    {
+        var query = new Message({message_id:item.message_id, disagree:item.disagree+1});
+        query.save({}, {
             success: function(model) {
-            	$scope.getLists();
+                $scope.getLists();
                 console.debug(model.toJSON());
             },
             error: function(model, response) {
                 console.debug(response);
             }
         });
-	}
+    }
 
-	$scope.removeThing = function(item)
-	{
-		item.isDelete = true;
-	}
+    $scope.removeThing = function(item)
+    {
+        item.isDelete = true;
+    }
 }
 
 function getDatetime(utc_sec)
 {
-	if(utc_sec){
-		var d = new Date(utc_sec);
-	}else{
-		var d = new Date();
-	}
+    if(utc_sec){
+        var d = new Date(utc_sec);
+    }else{
+        var d = new Date();
+    }
     var curr_d = chk0Num(d.getDate());
     var curr_m = chk0Num(d.getMonth() + 1); //Months are zero based
     var curr_y = d.getFullYear();
@@ -108,9 +108,9 @@ function getDatetime(utc_sec)
 
 function chk0Num(num)
 {
-	if(num < 10){
-		return "0"+num;
-	}else{
-		return num;
-	}
+    if(num < 10){
+        return "0"+num;
+    }else{
+        return num;
+    }
 }
