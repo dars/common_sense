@@ -10,17 +10,10 @@ function commonForm($scope)
             	var obj = model.toJSON();
             	$.each(obj, function(i, o){
             		o.isDelete = false;
-            		var d = new Date(o.createddate);
-            		var curr_d = chk0Num(d.getDate());
-                    var curr_m = chk0Num(d.getMonth() + 1); //Months are zero based
-                    var curr_y = d.getFullYear();
-                    var curr_h = chk0Num(d.getHours());
-                    var curr_min = chk0Num(d.getMinutes());
-                    var curr_dt = curr_y + "-" + curr_m + "-" + curr_d + " " + curr_h + ":" + curr_min;
-                    o.timestamp = curr_dt;
+                    o.timestamp = getDatetime(o.createddate);
             		$scope.commonThings.push(o);
             	});
-            	console.debug($scope.commonThings);
+            	// console.debug($scope.commonThings);
             },
             error: function(model, response) {
                 console.debug(response);
@@ -31,16 +24,7 @@ function commonForm($scope)
 	$scope.addThing = function()
 	{
 		if(this.things){
-			var d = new Date();
-            var curr_d = chk0Num(d.getDate());
-            var curr_m = chk0Num(d.getMonth() + 1); //Months are zero based
-            var curr_y = d.getFullYear();
-            var curr_h = chk0Num(d.getHours());
-            var curr_min = chk0Num(d.getMinutes());
-            var curr_dt = curr_y + "-" + curr_m + "-" + curr_d + " " + curr_h + ":" + curr_min;
-            console.log(this.commonThings);
-			this.commonThings.push({content:this.things,isDelete:false,timestamp:curr_dt});
-
+			this.commonThings.push({content:this.things,isDelete:false,timestamp:getDatetime()});
 			var to = new Message({
                 content: this.things,
                 agree:0,
@@ -48,9 +32,6 @@ function commonForm($scope)
             });
             to.create({
                 success:function(model) {
-                    // Notice how StackMob auto generated a unique primary key for this object instance under "testobject_id".
-                    // Schema primary keys are [schema name]_id
-                    // If you specified "testobject_id" in your JSON, StackMob will use your given one instead.
                     console.debug(model.toJSON());
                     $(".error").hide();
                     $(".success").show();
@@ -82,6 +63,23 @@ function init(){
         }
     });
 }
+
+function getDatetime(utc_sec)
+{
+	if(utc_sec){
+		var d = new Date(utc_sec);
+	}else{
+		var d = new Date();
+	}
+    var curr_d = chk0Num(d.getDate());
+    var curr_m = chk0Num(d.getMonth() + 1); //Months are zero based
+    var curr_y = d.getFullYear();
+    var curr_h = chk0Num(d.getHours());
+    var curr_min = chk0Num(d.getMinutes());
+    var curr_dt = curr_y + "-" + curr_m + "-" + curr_d + " " + curr_h + ":" + curr_min;
+    return curr_dt;
+}
+
 function chk0Num(num)
 {
 	if(num < 10){
