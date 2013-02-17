@@ -7,6 +7,7 @@ function commonForm($scope)
 	    var msgs = new Message();
 	    var q = new StackMob.Collection.Query();
 	    q.orderDesc('createddate');
+	    $(".alert").show();
         msgs.query(q, {
             success: function(model) {
             	var obj = model.toJSON();
@@ -19,10 +20,10 @@ function commonForm($scope)
             	$scope.$apply(function() {
                     $scope.commonThings = res;
                 });
-            	console.log('data done.');
+            	$(".alert").hide();
             },
             error: function(model, response) {
-                console.debug(response);
+                $(".alert").hide();
             }
         });
 	}
@@ -30,6 +31,7 @@ function commonForm($scope)
 	$scope.addThing = function()
 	{
 		if(this.things){
+			$(".alert").show();
 			var to = new Message({
                 content: this.things,
                 agree:0,
@@ -39,6 +41,7 @@ function commonForm($scope)
                 success:function(model) {
                 	$scope.getLists();
                     console.debug(model.toJSON());
+                    $(".alert").hide();
                 },
                 error : function(model, response) {
                     console.debug("Oops there was an error in creating the object.");
@@ -46,10 +49,10 @@ function commonForm($scope)
                     console.debug("Are you running this on StackMob's Local Runner?");
                     console.debug("Are you running this on StackMob's GitHub-integrated hosting?")
                     console.debug(response);
+                    $(".alert").hide();
                 }
             });
             this.things = "";
-            console.log('time issue?');
 		}
 	}
 
