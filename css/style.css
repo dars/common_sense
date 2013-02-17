@@ -1,0 +1,26 @@
+.things a {
+  text-decoration: none;
+}
+.things .timestamp {
+  float: right;
+  margin-left: 10px;
+  color: #9ca4a8;
+  font-family: 'BenchNine', sans-serif;
+  font-size: 15px;
+}
+.things .string {
+  color: #6d747f;
+  margin-left: 10px;
+}
+.things .icon-thumbs-up {
+  color: #94a1be;
+}
+.things .icon-thumbs-up:hover {
+  color: #3d6dbe;
+}
+.things .icon-thumbs-down {
+  color: #c88e9c;
+}
+.things .icon-thumbs-down:hover {
+  color: #be1d36;
+}

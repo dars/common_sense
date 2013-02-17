@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>這不是很 common sense 嗎？</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <link href='http://fonts.googleapis.com/css?family=BenchNine' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="angular.js"></script>
+    <script src="controller.js"></script>
+    <script src="jquery-1.9.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://static.stackmob.com/js/stackmob-js-0.7.0-bundled-min.js"></script>
+    <script type="text/javascript">
+        // Initialize StackMob object
+        // Copy your init data from here: https://dashboard.stackmob.com/sdks/js/config
+        // Your other app information is here: https://dashboard.stackmob.com/settings
+        StackMob.init({
+            appName: "common_sense",
+            clientSubdomain: "dars94gmailcom",
+            publicKey: "9922cc1b-4ac0-48e8-9d0a-1343facdce46",
+            apiVersion: 0
+        });
+
+        var Message = StackMob.Model.extend({
+            schemaName : 'message' //Tell StackMob to save instances of TestObject to the table "testobject"
+        });
+
+        $(function(){});
+    </script>
+
+</head>
+<body class="container" ng-controller="commonForm"><br>
+    <div class="row">
+        <div class="span12 well well-small">
+            <form action="" class="form-inline" ng-submit="addThing()">
+                <fieldset>
+                    <legend>你想說的是...</legend>
+                    <input type="text" id="things" class="span9" placeholder="我覺得..." ng-model="things">
+                    <button type="submit" class="btn btn-primary">這不是很 common sense 嗎？</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <div class="things clearfix" ng-repeat="item in commonThings | filter:{isDelete:false}">
+                <i class="icon-quote-left"></i>&nbsp;
+                <span class="label label-info">{{item.content}}</span>&nbsp;<i class="icon-quote-right"></i>
+                <span class="string">這不是很 common sense 嗎？</span>
+                <a href="javascript:void(0)"><i class="icon-thumbs-up"></i></a>
+                <a href="javascript:void(0)"><i class="icon-thumbs-down"></i></a>
+                <span class="timestamp">{{item.timestamp}}</span>
+                <!-- <a href="javascript:void(0)" class="close" ng-click="removeThing(item)"><span class="label label-important">delete</span></a> -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
