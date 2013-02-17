@@ -20,7 +20,7 @@ function commonForm($scope)
             }
         });
 	}
-	$scope.getLists();
+	setTimeout($scope.getLists(),500);
 	$scope.addThing = function()
 	{
 		if(this.things){
