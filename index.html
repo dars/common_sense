@@ -53,8 +53,8 @@
                 <i class="icon-quote-left"></i>&nbsp;
                 <span class="label label-info">{{item.content}}</span>&nbsp;<i class="icon-quote-right"></i>
                 <span class="string">這不是很 common sense 嗎？</span>
-                <a href="javascript:void(0)"><i class="icon-thumbs-up"></i></a>
-                <a href="javascript:void(0)"><i class="icon-thumbs-down"></i></a>
+                <a href="javascript:void(0)" ng-click="agree_btn(item)"><i class="icon-thumbs-up"></i></a>
+                <a href="javascript:void(0)" ng-click="disagree_btn(item)"><i class="icon-thumbs-down"></i></a>
                 <span class="timestamp">{{item.timestamp}}</span>
                 <!-- <a href="javascript:void(0)" class="close" ng-click="removeThing(item)"><span class="label label-important">delete</span></a> -->
             </div>

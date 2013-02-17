@@ -1,9 +1,9 @@
 function commonForm($scope)
 {
 	$scope.things = "";
-	$scope.commonThings = [];
 	$scope.getLists = function()
 	{
+		$scope.commonThings = [];
 	    var msgs = new Message();
         msgs.fetch({
             success: function(model) {
@@ -24,7 +24,6 @@ function commonForm($scope)
 	$scope.addThing = function()
 	{
 		if(this.things){
-			this.commonThings.push({content:this.things,isDelete:false,timestamp:getDatetime()});
 			var to = new Message({
                 content: this.things,
                 agree:0,
@@ -32,9 +31,8 @@ function commonForm($scope)
             });
             to.create({
                 success:function(model) {
+                	$scope.getLists();
                     console.debug(model.toJSON());
-                    $(".error").hide();
-                    $(".success").show();
                 },
                 error : function(model, response) {
                     console.debug("Oops there was an error in creating the object.");
@@ -47,6 +45,35 @@ function commonForm($scope)
             this.things = "";
 		}
 	}
+
+	$scope.agree_btn = function(item)
+	{
+		var query = new Message({message_id:item.message_id, agree:item.agree+1});
+		query.save({}, {
+            success: function(model) {
+            	$scope.getLists();
+                console.debug(model.toJSON());
+            },
+            error: function(model, response) {
+                console.debug(response);
+            }
+        });
+	}
+
+	$scope.disagree_btn = function(item)
+	{
+		var query = new Message({message_id:item.message_id, disagree:item.disagree+1});
+		query.save({}, {
+            success: function(model) {
+            	$scope.getLists();
+                console.debug(model.toJSON());
+            },
+            error: function(model, response) {
+                console.debug(response);
+            }
+        });
+	}
+
 	$scope.removeThing = function(item)
 	{
 		item.isDelete = true;
