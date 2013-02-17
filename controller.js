@@ -5,7 +5,9 @@ function commonForm($scope)
 	{
 		$scope.commonThings = [];
 	    var msgs = new Message();
-        msgs.fetch({
+	    var q = new StackMob.Collection.Query();
+	    q.orderDesc('createddate');
+        msgs.query(q, {
             success: function(model) {
             	var obj = model.toJSON();
             	$.each(obj, function(i, o){
