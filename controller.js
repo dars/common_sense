@@ -13,14 +13,14 @@ function commonForm($scope)
                     o.timestamp = getDatetime(o.createddate);
             		$scope.commonThings.push(o);
             	});
-            	// console.debug($scope.commonThings);
+            	console.log('data done.');
             },
             error: function(model, response) {
                 console.debug(response);
             }
         });
 	}
-	setTimeout($scope.getLists(),500);
+	$scope.getLists();
 	$scope.addThing = function()
 	{
 		if(this.things){
@@ -78,17 +78,6 @@ function commonForm($scope)
 	{
 		item.isDelete = true;
 	}
-}
-function init(){
-	var msgs = new Message();
-    msgs.fetch({
-        success: function(model) {
-        	console.debug(model.toJSON());
-        },
-        error: function(model, response) {
-            console.debug(response);
-        }
-    });
 }
 
 function getDatetime(utc_sec)

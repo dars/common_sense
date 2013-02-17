@@ -1,6 +1,9 @@
 .things a {
   text-decoration: none;
 }
+.things .string_block {
+  margin-right: 20px;
+}
 .things .timestamp {
   float: right;
   margin-left: 10px;
