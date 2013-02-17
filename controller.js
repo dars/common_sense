@@ -1,20 +1,24 @@
 function commonForm($scope)
 {
 	$scope.things = "";
+	$scope.commonThings = [{content:"初始資料...", isDelete:false,agree:0, disagree:0, timestamp:"0000-00-00 00:00"}];
 	$scope.getLists = function()
 	{
-		$scope.commonThings = [];
 	    var msgs = new Message();
 	    var q = new StackMob.Collection.Query();
 	    q.orderDesc('createddate');
         msgs.query(q, {
             success: function(model) {
             	var obj = model.toJSON();
+            	var res = [];
             	$.each(obj, function(i, o){
             		o.isDelete = false;
                     o.timestamp = getDatetime(o.createddate);
-            		$scope.commonThings.push(o);
+            		res.push(o);
             	});
+            	$scope.$apply(function() {
+                    $scope.commonThings = res;
+                });
             	console.log('data done.');
             },
             error: function(model, response) {
@@ -45,6 +49,7 @@ function commonForm($scope)
                 }
             });
             this.things = "";
+            console.log('time issue?');
 		}
 	}
 
