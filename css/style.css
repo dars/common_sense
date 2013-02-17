@@ -12,15 +12,21 @@
   color: #6d747f;
   margin-left: 10px;
 }
-.things .icon-thumbs-up {
+.things .agree_block a {
   color: #94a1be;
 }
-.things .icon-thumbs-up:hover {
+.things .agree_block a i {
+  margin-right: 5px;
+}
+.things .agree_block a:hover {
   color: #3d6dbe;
 }
-.things .icon-thumbs-down {
+.things .disagree_block a {
   color: #c88e9c;
 }
-.things .icon-thumbs-down:hover {
+.things .disagree_block a i {
+  margin-right: 5px;
+}
+.things .disagree_block a:hover {
   color: #be1d36;
 }

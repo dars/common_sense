@@ -38,6 +38,9 @@
 <body class="container" ng-controller="commonForm"><br>
     <div class="row">
         <div class="span12 well well-small">
+            <div class="thumbnail">
+                <img src="Common-Sense.png" width=320 height=240 alt="common sense">
+            </div>
             <form action="" class="form-inline" ng-submit="addThing()">
                 <fieldset>
                     <legend>你想說的是...</legend>
@@ -50,11 +53,13 @@
     <div class="row">
         <div class="span12">
             <div class="things clearfix" ng-repeat="item in commonThings | filter:{isDelete:false}">
-                <i class="icon-quote-left"></i>&nbsp;
-                <span class="label label-info">{{item.content}}</span>&nbsp;<i class="icon-quote-right"></i>
-                <span class="string">這不是很 common sense 嗎？</span>
-                <a href="javascript:void(0)" ng-click="agree_btn(item)"><i class="icon-thumbs-up"></i></a>
-                <a href="javascript:void(0)" ng-click="disagree_btn(item)"><i class="icon-thumbs-down"></i></a>
+                <span>
+                    <i class="icon-quote-left"></i>&nbsp;
+                    <span class="label label-info">{{item.content}}</span>&nbsp;<i class="icon-quote-right"></i>
+                    <span class="string">這不是很 common sense 嗎？</span>
+                </span>
+                <span class="agree_block"><a href="javascript:void(0)" ng-click="agree_btn(item)"><i class="icon-thumbs-up"></i>+{{item.agree}}</a></span>
+                <span class="disagree_block"><a href="javascript:void(0)" ng-click="disagree_btn(item)"><i class="icon-thumbs-down"></i>-{{item.disagree}}</a></span>
                 <span class="timestamp">{{item.timestamp}}</span>
                 <!-- <a href="javascript:void(0)" class="close" ng-click="removeThing(item)"><span class="label label-important">delete</span></a> -->
             </div>
