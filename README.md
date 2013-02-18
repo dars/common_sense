@@ -4,7 +4,7 @@
 
 使用到以下工具
 
-[Angular](http://angularjs.org/)
+[AngularJS](http://angularjs.org/)
 
 [StackMob](https://www.stackmob.com/)
 
