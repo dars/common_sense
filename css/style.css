@@ -36,6 +36,17 @@
 .copyright {
   color: #9ca4a8;
   margin-top: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   text-align: center;
+}
+.github {
+  text-align: center;
+  margin-bottom: 25px;
+}
+.github a {
+  color: #666;
+}
+.github a:hover {
+  color: #000;
+  text-decoration: none;
 }
