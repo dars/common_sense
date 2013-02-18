@@ -90,27 +90,11 @@ function commonForm($scope)
     }
 }
 
+// 改用 moment.js
 function getDatetime(utc_sec)
 {
     if(utc_sec){
-        var d = new Date(utc_sec);
-    }else{
-        var d = new Date();
+        return moment(utc_sec).format("YYYY-MM-DD HH:mm");
     }
-    var curr_d = chk0Num(d.getDate());
-    var curr_m = chk0Num(d.getMonth() + 1); //Months are zero based
-    var curr_y = d.getFullYear();
-    var curr_h = chk0Num(d.getHours());
-    var curr_min = chk0Num(d.getMinutes());
-    var curr_dt = curr_y + "-" + curr_m + "-" + curr_d + " " + curr_h + ":" + curr_min;
-    return curr_dt;
-}
-
-function chk0Num(num)
-{
-    if(num < 10){
-        return "0"+num;
-    }else{
-        return num;
-    }
+    return moment().format("YYYY-MM-DD HH:mm");
 }
